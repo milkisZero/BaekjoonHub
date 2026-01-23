@@ -26,9 +26,8 @@ int main() {
         if (st.upper_bound(v[i]) != st.end()) {
             idx = i;
             st.insert(v[i]);
-            ll tmp = *st.upper_bound(v[i]);
-            v[i] = tmp;
-            st.erase(tmp);
+            v[i] = *st.upper_bound(v[i]);
+            st.erase(v[i]);
             break;
         }
 
@@ -38,14 +37,8 @@ int main() {
     ll l = idx + 1;
     ll r = n - 1;
     for (auto iter = st.rbegin(); iter != st.rend(); iter++) {
-        if (v[idx] > *iter) {
-            v[l] = *iter;
-            l++;
-        }
-        else {
-            v[r] = *iter;
-            r--;
-        }
+        if (v[idx] > *iter) v[l++] = *iter;
+        else v[r--] = *iter;
     }
 
     for (auto &e : v) cout << e << sp;
