@@ -30,7 +30,7 @@ int main() {
     pq.push(v[0].second);
 
     for (int i = 1; i < n; i++) {
-        while (!pq.empty() && pq.top() <= v[i].first) {
+        if (pq.top() <= v[i].first) {
             pq.pop();
         }
         pq.push(v[i].second);
