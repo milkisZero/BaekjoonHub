@@ -1,6 +1,5 @@
-SELECT DISTINCT a.ID, a.EMAIL, a.FIRST_NAME, a.LAST_NAME
-FROM DEVELOPERS a, SKILLCODES b
-WHERE 
-    (a.SKILL_CODE & b.CODE) > 0
-    AND b.NAME IN ("Python", "C#")
-ORDER BY a.ID;
+select distinct ID,	EMAIL,	FIRST_NAME,	LAST_NAME
+from DEVELOPERS d
+join SKILLCODES s on (d.SKILL_CODE & s.CODE) > 0
+where s.NAME = 'C#' or s.NAME = 'Python'
+order by ID asc
