@@ -1,8 +1,6 @@
-select ITEM_ID,	ITEM_NAME,	RARITY
-from ITEM_INFO
-where ITEM_ID in (
-    select b.ITEM_ID
-    from ITEM_INFO a, ITEM_TREE b
-    where b.PARENT_ITEM_ID = a.ITEM_ID and a.RARITY = "RARE"
-)
-order by ITEM_ID desc
+select b.ITEM_ID,	b.ITEM_NAME,	b.RARITY
+from ITEM_TREE t
+join ITEM_INFO a on a.ITEM_ID = t.PARENT_ITEM_ID
+join ITEM_INFO b on b.ITEM_ID = t.ITEM_ID
+where a.RARITY = "RARE"
+order by b.ITEM_ID desc
