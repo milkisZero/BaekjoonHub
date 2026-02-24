@@ -25,11 +25,8 @@ int main() {
     sort(v.begin(), v.end());
 
     for (int i = 1; i <= n; i++) {
-        dp[i] = max(dp[i], dp[i - 1]);
-
         ll idx = upper_bound(v.begin(), v.begin() + i, pll(v[i].first - s, LLINF)) - v.begin();
-
-        dp[i] = max(dp[i], dp[idx - 1] + v[i].second);
+        dp[i] = max(dp[i-1], dp[idx - 1] + v[i].second);
     }
 
     cout << dp[n];
