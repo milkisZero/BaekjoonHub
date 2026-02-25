@@ -1,9 +1,16 @@
-select distinct a.CAR_ID, ifnull(b.k, "대여 가능") as AVAILABILITY
-from CAR_RENTAL_COMPANY_RENTAL_HISTORY a
-left join (
-    select CAR_ID, "대여중" as k
+select c.CAR_ID,
+       case
+           when exists (
+               select 1
+               from CAR_RENTAL_COMPANY_RENTAL_HISTORY h
+               where h.CAR_ID = c.CAR_ID
+                 and h.START_DATE <= '2022-10-16'
+                 and h.END_DATE >= '2022-10-16'
+           ) then '대여중'
+           else '대여 가능'
+       end as AVAILABILITY
+from (
+    select distinct CAR_ID
     from CAR_RENTAL_COMPANY_RENTAL_HISTORY
-    where START_DATE <= '2022-10-16' and END_DATE >= '2022-10-16'
-    group by CAR_ID
-) b on a.CAR_ID = b.CAR_ID
-order by a.CAR_ID desc
+) c
+order by c.CAR_ID desc;
