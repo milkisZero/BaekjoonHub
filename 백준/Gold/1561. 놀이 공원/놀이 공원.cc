@@ -16,29 +16,21 @@ int main() {
     ll n, m;
     cin >> n >> m;
 
-    vector<ll> v(m), v2(m);
-    ll maxi = 0;
-    for (int i = 0; i < m; i++) {
-        cin >> v[i];
-        maxi = max(maxi, v[i]);
-    }
+    vector<ll> v(m);
+    for (int i = 0; i < m; i++) cin >> v[i];
 
     if (n <= m) {
         cout << n;
         return 0;
     }
 
-    n -= m;
-
-    ll l = 0, r = maxi * n, mid;
+    ll l = 0, r = 30 * n, mid;
     ll res = 0, time = 0;
     while (l <= r) {
         mid = (l + r) / 2;
 
         ll cnt = 0;
-        for (int i = 0; i < m; i++) {
-            cnt += (mid / v[i]);
-        }
+        for (int i = 0; i < m; i++) cnt += (mid / v[i]) + 1;
 
         if (cnt >= n) r = mid - 1;
         else {
@@ -49,15 +41,13 @@ int main() {
     }
 
     n -= res;
-    while (1) {
-        time++;
-        for (int i = 0; i < m; i++) {
-            if (time % v[i] == 0) {
-                n--;
-                if (n == 0) {
-                    cout << i + 1;
-                    return 0;
-                }
+    time++;
+    for (int i = 0; i < m; i++) {
+        if (time % v[i] == 0) {
+            n--;
+            if (n == 0) {
+                cout << i + 1;
+                return 0;
             }
         }
     }
