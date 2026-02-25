@@ -1,4 +1,4 @@
-select distinct a.ID, b.FISH_NAME, c.maxi as LENGTH
+select a.ID, b.FISH_NAME, c.maxi as LENGTH
 from FISH_INFO a
 join FISH_NAME_INFO b on a.FISH_TYPE = b.FISH_TYPE
 join (
