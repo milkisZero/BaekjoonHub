@@ -20,30 +20,22 @@ bool check(ll r1, ll r2, ll c1, ll c2) {
             else b = 1;
         }
     }
-
     if (w + b == 1) {
         if (w) cout << '1';
         else cout << '0';
         return 0;
     }
-
     return 1;
 }
 
 void recur(ll r1, ll c1, ll n) {
-
     n /= 2;
 
     cout << "(";
-
     if (check(r1, r1 + n, c1, c1 + n)) recur(r1, c1, n);
-
     if (check(r1, r1 + n, c1 + n, c1 + n * 2)) recur(r1, c1 + n, n);
-
     if (check(r1 + n, r1 + 2 * n, c1, c1 + n)) recur(r1 + n, c1, n);
-
     if (check(r1 + n, r1 + 2 * n, c1 + n, c1 + 2 * n)) recur(r1 + n, c1 + n, n);
-
     cout << ")";
 
     return;
