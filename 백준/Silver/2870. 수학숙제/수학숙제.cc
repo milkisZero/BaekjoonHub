@@ -24,12 +24,10 @@ int main() {
 
         string k = "";
         for (int j = 0; j < s.size(); j++) {
-            if (s[j] >= '0' && s[j] <= '9') {
-                if (k.size() == 0 && s[j] == '0' && s[j + 1] >= '0' && s[j + 1] <= '9') continue;
-                k += s[j];
-            }
+            if (s[j] >= '0' && s[j] <= '9') k += s[j];
             else if (k.size()) {
-                v.push_back(k);
+                size_t start = k.find_first_not_of('0');
+                v.push_back(start == string::npos ? "0" : k.substr(start));
                 k = "";
             }
         }
