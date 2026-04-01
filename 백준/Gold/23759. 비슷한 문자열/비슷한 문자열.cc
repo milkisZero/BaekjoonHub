@@ -20,22 +20,19 @@ int main() {
     cin >> n >> k;
 
     memset(mp, -1, sizeof(mp));
-
-    vector<string> v(n);
     int maxi = 1;
 
     for (int i = 0; i < n; i++) {
-        cin >> v[i];
+        string tmp;
+        cin >> tmp;
 
         dp[i] = 1;
         for (int j = 0; j < k; j++) {
-            ll idx = v[i][j] - 'a';
+            int idx = tmp[j] - 'a';
             if (mp[idx][j] != -1) {
-                int pre = mp[idx][j];
-                dp[i] = max(dp[i], dp[pre] + 1);
+                dp[i] = max(dp[i], dp[mp[idx][j]] + 1);
                 maxi = max(maxi, dp[i]);
             }
-
             mp[idx][j] = i;
         }
     }
