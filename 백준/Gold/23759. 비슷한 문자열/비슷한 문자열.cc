@@ -10,31 +10,31 @@ using pii = pair<int, int>;
 using pll = pair<ll, ll>;
 using ull = unsigned long long;
 
-int dp[500005];
-int mp[26][10];
+int dp[26][10];
 
 int main() {
     fastio;
 
-    ll n, k;
+    int n, k;
     cin >> n >> k;
 
-    memset(mp, -1, sizeof(mp));
     int maxi = 1;
 
     for (int i = 0; i < n; i++) {
         string tmp;
         cin >> tmp;
 
-        dp[i] = 1;
+        int pre_maxi = 0;
         for (int j = 0; j < k; j++) {
             int idx = tmp[j] - 'a';
-            if (mp[idx][j] != -1) {
-                dp[i] = max(dp[i], dp[mp[idx][j]] + 1);
-                maxi = max(maxi, dp[i]);
-            }
-            mp[idx][j] = i;
+            pre_maxi = max(pre_maxi, dp[idx][j]);
         }
+
+        for (int j = 0; j < k; j++) {
+            int idx = tmp[j] - 'a';
+            dp[idx][j] = pre_maxi + 1;
+        }
+        maxi = max(maxi, pre_maxi + 1);
     }
 
     cout << n - maxi;
