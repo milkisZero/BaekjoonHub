@@ -10,8 +10,8 @@ using pii = pair<int, int>;
 using pll = pair<ll, ll>;
 using ull = unsigned long long;
 
-ll dp[500005];
-ll mp[26][10];
+int dp[500005];
+int mp[26][10];
 
 int main() {
     fastio;
@@ -22,11 +22,12 @@ int main() {
     memset(mp, -1, sizeof(mp));
 
     vector<string> v(n);
-    ll maxi = 1;
+    int maxi = 1;
 
     for (int i = 0; i < n; i++) {
         cin >> v[i];
 
+        dp[i] = 1;
         for (int j = 0; j < k; j++) {
             ll idx = v[i][j] - 'a';
             if (mp[idx][j] != -1) {
@@ -34,7 +35,6 @@ int main() {
                 dp[i] = max(dp[i], dp[pre] + 1);
                 maxi = max(maxi, dp[i]);
             }
-            else dp[i] = max((ll)1, dp[i]);
 
             mp[idx][j] = i;
         }
