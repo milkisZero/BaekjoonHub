@@ -11,14 +11,15 @@ using pll = pair<ll, ll>;
 using ull = unsigned long long;
 
 ll dp[500005];
-
-map<pll, vector<ll>> mp;
+ll mp[26][10];
 
 int main() {
     fastio;
 
     ll n, k;
     cin >> n >> k;
+
+    memset(mp, -1, sizeof(mp));
 
     vector<string> v(n);
     ll maxi = 1;
@@ -27,15 +28,15 @@ int main() {
         cin >> v[i];
 
         for (int j = 0; j < k; j++) {
-            mp[{v[i][j], j}].push_back(i);
-            int size = mp[{v[i][j], j}].size();
-
-            if (size > 1) {
-                int pre = mp[{v[i][j], j}][size - 2];
+            ll idx = v[i][j] - 'a';
+            if (mp[idx][j] != -1) {
+                int pre = mp[idx][j];
                 dp[i] = max(dp[i], dp[pre] + 1);
                 maxi = max(maxi, dp[i]);
             }
             else dp[i] = max((ll)1, dp[i]);
+
+            mp[idx][j] = i;
         }
     }
 
