@@ -28,12 +28,8 @@ int main() {
         int l = 0, r = s.size() - 1;
         while (l < r && s[l] == s[r]) l++, r--;
 
-        if (l >= r) {
-            cout << 0 << endl;
-            continue;
-        }
-
-        if (isPalin(s, l + 1, r) || isPalin(s, l, r - 1)) cout << 1 << endl;
+        if (l >= r) cout << 0 << endl;
+        else if (isPalin(s, l + 1, r) || isPalin(s, l, r - 1)) cout << 1 << endl;
         else cout << 2 << endl;
     }
 
