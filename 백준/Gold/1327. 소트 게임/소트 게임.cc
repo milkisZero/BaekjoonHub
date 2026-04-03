@@ -38,7 +38,6 @@ void bfs(vector<ll> v) {
 
                 if (tmp != sorty) q.push(tmp);
             }
-            else mp[tmp] = min(mp[tmp], mp[v2] + 1);
         }
     }
 
