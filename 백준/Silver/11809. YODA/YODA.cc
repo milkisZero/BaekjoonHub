@@ -33,20 +33,17 @@ int main() {
         }
     }
 
-    if (aa.empty()) aa = "YODA";
-    else {
-        size_t st = aa.find_first_not_of('0');
-        aa = (st == string::npos ? "0" : aa.substr(st));
-    }
+    auto res = [](string k) {
+        if (k.empty()) k = "YODA";
+        else {
+            size_t st = k.find_first_not_of('0');
+            k = (st == string::npos ? "0" : k.substr(st));
+        }
+        return k;
+    };
 
-    if (bb.empty()) bb = "YODA";
-    else {
-        size_t st = bb.find_first_not_of('0');
-        bb = (st == string::npos ? "0" : bb.substr(st));
-    }
-
-    cout << aa << endl;
-    cout << bb;
+    cout << res(aa) << endl;
+    cout << res(bb);
 
     return 0;
 }
