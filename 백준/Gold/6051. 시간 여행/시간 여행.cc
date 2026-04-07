@@ -16,7 +16,7 @@ int main() {
     int n;
     cin >> n;
 
-    map<ll, pll> mp;
+    unordered_map<ll, pll> mp;
     mp[0] = {-1, -1};
 
     for (int i = 1; i <= n; i++) {
