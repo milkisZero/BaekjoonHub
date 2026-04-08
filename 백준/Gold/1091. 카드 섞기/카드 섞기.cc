@@ -16,19 +16,15 @@ int main() {
     ll n;
     cin >> n;
 
-    vector<ll> p(n), s(n), v(n), v2(n);
+    bool check = 0;
+
+    vector<ll> p(n), s(n), v(n);
     for (int i = 0; i < n; i++) cin >> p[i];
     for (int i = 0; i < n; i++) {
         cin >> s[i];
-        v2[i] = v[i] = i;
-    }
+        v[i] = i;
 
-    bool check = 0;
-    for (int i = 0; i < n; i++) {
-        ll k = (i % 3);
-        if (k != p[v2[i]]) {
-            check = 1;
-        }
+        if ((i % 3) != p[v[i]]) check = 1;
     }
 
     if (!check) {
@@ -36,29 +32,25 @@ int main() {
         return 0;
     }
 
+    vector<ll> v2(n);
     ll cnt = 0;
     while (1) {
         cnt++;
-        vector<ll> v3(n);
-        for (int i = 0; i < n; i++) {
-            v3[s[i]] = v2[i];
-        }
-        v2 = v3;
+        for (int i = 0; i < n; i++) v2[s[i]] = v[i];
+        swap(v, v2);
 
-        if (v2 == v) {
+        ll tmp = 0;
+        check = 0;
+        for (int i = 0; i < n; i++) {
+            if (v[i] == i) tmp++;
+            if ((i % 3) != p[v[i]]) check = 1;
+        }
+
+        if (tmp == n) {
             cout << -1;
             return 0;
         }
-
-        bool check = 0;
-        for (int i = 0; i < n; i++) {
-            ll k = (i % 3);
-            if (k != p[v2[i]]) {
-                check = 1;
-            }
-        }
-
-        if (!check) break;
+        else if (!check) break;
     }
 
     cout << cnt;
