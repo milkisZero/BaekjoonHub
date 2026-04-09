@@ -13,12 +13,8 @@ using ull = unsigned long long;
 int main() {
     fastio;
 
-    while (1) {
-        ll n, m;
-        cin >> n >> m;
-
-        if (!n && !m) return 0;
-
+    ll n, m;
+    while (cin >> n >> m && (n || m)) {
         ll s, d;
         cin >> s >> d;
 
@@ -47,7 +43,6 @@ int main() {
                     for (auto [next, k] : edge[node]) {
                         if (dist[next] > val + k) {
                             dist[next] = val + k;
-
                             if (next != ed) pq.push({-dist[next], next});
                         }
                     }
